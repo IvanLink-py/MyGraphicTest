@@ -10,9 +10,12 @@ public class Particle : CircleShape
     
     public float Mass = 5;
     public Vector2f Velocity;
+    public ParticleSpace Space;
 
-    public Particle()
+    public Particle(ParticleSpace space)
     {
+        Space = space;
+        
         FillColor = Color.Cyan;
         OutlineThickness = 1;
         OutlineColor = Color.Blue;
@@ -25,6 +28,9 @@ public class Particle : CircleShape
 
     public void UpdatePhysics()
     {
+        var attraction = Space.CalculateAttraction(Position, Mass);
+        Velocity += attraction / Mass;
+        
         Position += Velocity;
     }
 }

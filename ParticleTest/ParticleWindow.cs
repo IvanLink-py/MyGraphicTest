@@ -7,9 +7,9 @@ namespace ParticleTest;
 
 public class ParticleWindow
 {
-    private RenderWindow _window;
+    private readonly RenderWindow _window;
     public ParticleSpace Space;
-    private Clock _clock;
+    private readonly Clock _clock;
     public ParticleWindow(Vector2u size, string title)
     {
         VideoMode mode = new(size.X, size.Y);
@@ -17,6 +17,8 @@ public class ParticleWindow
         _window.SetFramerateLimit(60);
         _clock = new Clock();
         Space = new ParticleSpace(10000);
+
+        Space.NewAttractor();
     }
     public void Run()
     {
