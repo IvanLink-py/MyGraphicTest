@@ -2,7 +2,7 @@
 
 namespace ParticleTest;
 
-public struct Attractor
+public class Attractor
 {
     public Vector2f Position;
     public float Force;

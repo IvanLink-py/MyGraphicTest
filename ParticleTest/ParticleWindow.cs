@@ -8,6 +8,8 @@ public class ParticleWindow
 {
     private readonly Clock _clock;
     private readonly RenderWindow _window;
+
+    private Attractor _mouseAttractor;
     public ParticleSpace Space;
 
     public ParticleWindow(Vector2u size, string title)
@@ -19,10 +21,12 @@ public class ParticleWindow
         _clock = new Clock();
 
         Space = new ParticleSpace(10);
+        _mouseAttractor = Space.NewAttractor(new Vector2f(200, 200), 0.01f);
     }
 
     public void Run()
     {
+        _window.MouseMoved += OnMouseMoved;
         _window.MouseButtonPressed += OnMouseButtonPressed;
         _window.KeyPressed += Window_KeyPressed;
         _window.Closed += (_, _) => { _window.Close(); };
@@ -40,9 +44,17 @@ public class ParticleWindow
         }
     }
 
+    private void OnMouseMoved(object? sender, MouseMoveEventArgs e)
+    {
+        _mouseAttractor.Position.X = e.X;
+        _mouseAttractor.Position.Y = e.Y;
+        // _mouseAttractor.Position = new Vector2f(e.X, e.Y);
+        Console.WriteLine(_mouseAttractor.Position);
+    }
+
     private void OnMouseButtonPressed(object? sender, MouseButtonEventArgs e)
     {
-        Space.NewAttractor(new Vector2f(e.X, e.Y), 0.001f);
+        // Space.NewAttractor(new Vector2f(e.X, e.Y), 0.001f);
     }
 
     private void ShowFramerate()
