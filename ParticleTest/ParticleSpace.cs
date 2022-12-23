@@ -4,22 +4,19 @@ namespace ParticleTest;
 
 public class ParticleSpace
 {
-    public Particle[] Particles;
     public List<Attractor> Attractors = new();
+    public Particle[] Particles;
 
     public ParticleSpace(int count)
     {
         Particles = new Particle[count];
 
-        for (var i = 0; i < count; i++)
-        {
-            Particles[i] = new Particle(this);
-        }
+        for (var i = 0; i < count; i++) Particles[i] = new Particle(this);
     }
 
-    public Attractor NewAttractor()
+    public Attractor NewAttractor(Vector2f position, float force)
     {
-        Attractors.Add(new Attractor(new Vector2f(200, 200), 0.0001f));
+        Attractors.Add(new Attractor(position, force));
         return Attractors.Last();
     }
 
@@ -28,12 +25,9 @@ public class ParticleSpace
         var force = new Vector2f();
         return Attractors.Aggregate(force, (current, a) => current + a.CalculateAttraction(position, mass));
     }
-    
+
     public void UpdateParticles()
     {
-        foreach (var p in Particles)
-        {
-            p.UpdatePhysics();
-        }
+        foreach (var p in Particles) p.UpdatePhysics();
     }
 }
