@@ -30,4 +30,6 @@ public class ParticleSpace
     {
         foreach (var p in Particles) p.UpdatePhysics();
     }
+
+    public float GetFriction(Vector2f pos) => 0.1f;
 }
