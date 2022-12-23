@@ -21,8 +21,9 @@ public class Particle : CircleShape
 
         Radius = MathF.Sqrt(Mass);
 
-        Position = new Vector2f(500f * (float)Rnd.NextDouble() + 200, (float)Rnd.NextDouble() * 500 + 100);
-        Vel = new Vector2f(((float)Rnd.NextDouble() - 0.5f) * 20, ((float)Rnd.NextDouble() - 0.5f) * 20);
+        // Position = new Vector2f(500f * (float)Rnd.NextDouble() + 200, (float)Rnd.NextDouble() * 500 + 100);
+        Position = new Vector2f(100, (float)Rnd.NextDouble() * 500 + 100);
+        Vel = new Vector2f(20,0);
     }
 
     public void UpdatePhysics()
